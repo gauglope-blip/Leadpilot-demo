@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elite Auto Detailing | Professional Mobile Detailing</title>
+
+    <meta name="description"
+          content="Professional mobile auto detailing. Interior, exterior and complete vehicle detailing.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,.95);
+            border-bottom: 1px solid #252525;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #4da3ff;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 70px 7%;
+            background:
+                radial-gradient(circle at 80% 20%, #12375c 0, transparent 35%),
+                #0a0a0a;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid #276cae;
+            border-radius: 999px;
+            color: #8dc7ff;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: .98;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #4da3ff;
+        }
+
+        .hero p {
+            color: #bdbdbd;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 23px;
+            background: #4da3ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .button.secondary {
+            background: transparent;
+            border: 1px solid #444;
+        }
+
+        section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #131313;
+            border: 1px solid #252525;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #aaa;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 15px 0;
+        }
+
+        .about {
+            background: #111;
+        }
+
+        .faq {
+            max-width: 800px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            color: #aaa;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        footer {
+            border-top: 1px solid #252525;
+            padding: 30px 7%;
+            color: #777;
+            text-align: center;
+        }
+
+        /* AI CHAT */
+
+        #chat-button {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            border: none;
+            background: #4da3ff;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        #chat-box {
+            display: none;
+            position: fixed;
+            right: 25px;
+            bottom: 100px;
+            width: min(370px, calc(100vw - 30px));
+            height: 500px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 16px;
+            overflow: hidden;
+            z-index: 999;
+            box-shadow: 0 15px 50px rgba(0,0,0,.5);
+        }
+
+        .chat-header {
+            background: #171717;
+            padding: 18px;
+            font-weight: 700;
+        }
+
+        #messages {
+            height: 375px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .message {
+            padding: 10px 13px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+
+        .bot {
+            background: #222;
+            color: #ddd;
+        }
+
+        .user {
+            background: #4da3ff;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #333;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            background: #171717;
+            border: none;
+            color: white;
+            outline: none;
+        }
+
+        .chat-input button {
+            width: 70px;
+            border: none;
+            background: #4da3ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            nav .links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">ELITE<span>DETAILING</span></div>
+
+    <div class="links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="badge">
+            Professional Mobile Detailing
+        </div>
+
+        <h1>
+            Your car deserves to look
+            <span>brand new.</span>
+        </h1>
+
+        <p>
+            Professional interior and exterior auto detailing
+            brought directly to you.
+        </p>
+
+        <a class="button" href="#contact">
+            Get a Free Quote
+        </a>
+
+        <a class="button secondary" href="#services">
+            View Services
+        </a>
+
+    </div>
+</section>
+
+<section id="services">
+
+    <h2 class="section-title">
+        Our Services
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Interior Detail</h3>
+
+            <p>
+                Deep cleaning for seats, carpets, floors,
+                dashboard and interior surfaces.
+            </p>
+
+            <div class="price">
+                From $75
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Exterior Detail</h3>
+
+            <p>
+                Professional exterior wash, wheels,
+                tires and finishing treatment.
+            </p>
+
+            <div class="price">
+                From $65
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Complete Detail</h3>
+
+            <p>
+                A complete interior and exterior
+                detailing package.
+            </p>
+
+            <div class="price">
+                From $140
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about" class="about">
+
+    <h2 class="section-title">
+        Why Choose Us?
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Convenient</h3>
+            <p>
+                We bring professional detailing directly
+                to your location.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Professional</h3>
+            <p>
+                We treat every vehicle with attention
+                to detail.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Simple Booking</h3>
+            <p>
+                Contact us and we'll help you find
+                the right service.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="faq">
+
+    <h2 class="section-title">
+        Frequently Asked Questions
+    </h2>
+
+    <div class="faq">
+
+        <div class="faq-item">
+            <h3>Do you come to me?</h3>
+            <p>
+                Yes. We provide mobile detailing within
+                our service area.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How long does detailing take?</h3>
+            <p>
+                Service time depends on the package
+                and condition of the vehicle.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I get a quote?</h3>
+            <p>
+                Contact us with your vehicle information
+                and the service you're interested in.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contact" class="contact">
+
+    <h2 class="section-title">
+        Ready to make your car look better?
+    </h2>
+
+    <p>
+        Contact us today for a free quote.
+    </p>
+
+    <br>
+
+    <a class="button" href="mailto:example@email.com">
+        Email Us
+    </a>
+
+</section>
+
+<footer>
+    © 2026 Elite Detailing. All rights reserved.
+</footer>
+
+
+<!-- AI ASSISTANT -->
+
+<button id="chat-button" onclick="toggleChat()">
+    AI
+</button>
+
+<div id="chat-box">
+
+    <div class="chat-header">
+        Elite Detailing Assistant
+    </div>
+
+    <div id="messages">
+
+        <div class="message bot">
+            Hey! I'm the Elite Detailing assistant.
+            Ask me about our services, pricing, or getting a quote.
+        </div>
+
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            id="user-input"
+            type="text"
+            placeholder="Ask a question..."
+            onkeydown="if(event.key==='Enter') sendMessage()"
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleChat() {
+
+    const chat = document.getElementById("chat-box");
+
+    if (chat.style.display === "block") {
+        chat.style.display = "none";
+    } else {
+        chat.style.display = "block";
+    }
+
+}
+
+
+function addMessage(text, type) {
+
+    const messages = document.getElementById("messages");
+
+    const message = document.createElement("div");
+
+    message.className = "message " + type;
+
+    message.textContent = text;
+
+    messages.appendChild(message);
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+
+function generateResponse(question) {
+
+    const q = question.toLowerCase();
+
+    if (
+        q.includes("price") ||
+        q.includes("cost") ||
+        q.includes("how much")
+    ) {
+
+        return "Our interior detail starts at $75, exterior detail starts at $65, and complete details start at $140. Final pricing can depend on the vehicle and its condition.";
+
+    }
+
+    if (
+        q.includes("interior")
+    ) {
+
+        return "Our interior detail includes cleaning of seats, carpets, floors, dashboard and interior surfaces. It starts at $75.";
+
+    }
+
+    if (
+        q.includes("exterior")
+    ) {
+
+        return "Our exterior detail includes a professional wash, wheel and tire cleaning, and exterior finishing. It starts at $65.";
+
+    }
+
+    if (
+        q.includes("quote") ||
+        q.includes("book") ||
+        q.includes("appointment")
+    ) {
+
+        return "I'd be happy to help you get started. Please contact the business with your vehicle type, desired service, and preferred date.";
+
+    }
+
+    if (
+        q.includes("mobile") ||
+        q.includes("come to me")
+    ) {
+
+        return "Yes! We provide mobile detailing within our service area.";
+
+    }
+
+    if (
+        q.includes("hello") ||
+        q.includes("hi") ||
+        q.includes("hey")
+    ) {
+
+        return "Hey! What would you like to know about our detailing services?";
+
+    }
+
+    return "I can help with services, pricing, mobile detailing, quotes, and appointments. What would you like to know?";
+
+}
+
+
+function sendMessage() {
+
+    const input = document.getElementById("user-input");
+
+    const question = input.value.trim();
+
+    if (!question) return;
+
+    addMessage(question, "user");
+
+    input.value = "";
+
+    setTimeout(function() {
+
+        const response = generateResponse(question);
+
+        addMessage(response, "bot");
+
+    }, 500);
+
+}
+
+</script>
+
+</body>
+</html>
